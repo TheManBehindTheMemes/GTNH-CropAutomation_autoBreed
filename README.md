@@ -70,7 +70,7 @@ First note the orientation of the robot sitting atop the OC charger. It must fac
 
 **The location of the water is completely flexible**. They do not have to be in the same locations as in the photo (underneath all five grates) and you can have as many as you would like on both the working farm and storage farm. However, there MUST be a block on top of each water and no two can be next to each other. The block can be literally anything, even a lily pad will work, so long as there is something. It is also possible to use garden soil or fertilized dirt and have absolutely no water on the farms at all, but that sacrifices a few nutrient stats and prevents you from growing crops that require a particular block underneath.
 
-**The starting crops must be placed manually in the checkerboard pattern** seen in the photo. This layout goes for all three programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). Even worse, if you have just a single seed of your target crop, it is possible to start with a different crop next to it for crossbreeding (ie. Stickreed). It is not necessary to place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm, respectively.
+**The starting crops must be placed manually in the checkerboard pattern** seen in the photo. This layout goes for all four programs. If you cannot fill the entire checkerboard to start, the absolute minimum required is two (one as the target crop and the other next to it for crossbreeding). Even worse, if you have just a single seed of your target crop, it is possible to start with a different crop next to it for crossbreeding (ie. Stickreed). It is not necessary to place empty crop sticks to fill the rest of the checkerboard. The target crop is used by autoStat and autoSpread to identify the crop you want to stat-up or spread to the storage farm, respectively.
 
 ![CropBot-FarmBottom](media/CropBot-FarmBottom.png?)
 
@@ -91,8 +91,16 @@ The second program **autoStat** automatically stats-up the target crop until the
 The third program **autoSpread** automatically spreads (duplicates) the target crop until the storage farm is full. New crops are only moved to the storage farm if their Gr + Ga - Re is at least 50 (configurable). The maximum growth and resistance stats for child crops are also configurable parameters which default to 23 and 2, respectively. To run, simply enter:
 
     autoSpread
-
+    
 (Optional) Disable useStorageFarm in the config to harvest child crops on the working farm during autoSpread instead of moving them to the storage farm. They are only harvested once they reach their maximum growth stage - 1 for the best chances at dropping seeds. Everything is deposited in the storage chest, including other types of seeds and those that do not meet the autoSpreadThreshold. This setting also causes autoSpread to run until the maximum breeding round is reached which means a single iteration can collect hundreds of seeds. It is recommended to use a full-block ME interface as the storage chest if using this method.
+
+The fourth program **autoBreed** automatically attempts to breed the crop that is specified in the code with the parent crop that is provided (and specified in the code). It will first attempt to fill the working area with the parent crop, to increase the chance of a successful mutation. After the working area is filled, it will then attempt to stat up the crop, just like the autoStat program. If the targetted crop is found at any stage in this process, the program will finish. An important thing to note is that it does not keep track of how much breeding rounds have occured, so it is advised to delete any excess byproducts. To run, simply enter:
+
+    autoBreed
+
+To set both the target crop and the parent crop for the program above, go to cropList.lua and find the crop you want to set. Take the line number that crop is on, and put it in the brackets of the desired variable in autoBreed.lua (see picture below for more detail). Please note that leave either the target crop or the parent crop as "1" will not allow the program to start.
+
+{{{insert image here}}}
 
 Lastly, these programs can be chained together. This may be helpful if you have brand new crops (ie. 1/1/1 spruce saplings) and want them to immediately start spreading once fully statted-up. No crops are added to the storage farm until autoStat is complete. Note that keepMutations in the config should probably be set to false (default) otherwise the storage farm will be overwritten once the second program begins. To run autoSpread after autoStat, simply enter:
 
