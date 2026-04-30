@@ -7,6 +7,8 @@ local scripts = {
     'gps.lua',
     'scanner.lua',
     'config.lua',
+    'cropList.lua',
+    'autoBreed.lua',
     'autoStat.lua',
     'autoTier.lua',
     'autoSpread.lua',
