@@ -1,6 +1,4 @@
---This will be ordered alphebetically, with the exception of null
-local cropList = {
-  'NULL',
+local cropList = { 'NULL', --THIS IS NOT A VALID CROP
   'Acacia Bonzai',
   'Aluminum Oreberry',
   'Ardite Berry',
@@ -103,7 +101,7 @@ local cropList = {
   'Purple Glowshroom',
   'Pyrolusium',
   'Quantaria',
-  'Rape', --Also known as Canola outside of the game
+  'Rape',
   'Raspberry',
   'Reactoria',
   'Red Mushrooms',
