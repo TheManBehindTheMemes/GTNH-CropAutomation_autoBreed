@@ -146,6 +146,10 @@ local function runOnce(firstRun)
         gps.go(gps.workingSlotToPos(slot))
         local crop = scanner.scan()
 
+        if firstRun then
+            database.updateFarm(slot, crop)
+        end
+
         if slot % 2 == 0 then
             checkChild(slot, crop, firstRun)
         else
