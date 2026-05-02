@@ -10,7 +10,7 @@ local cropList = { 'NULL', --THIS IS NOT A VALID CROP
   'Belladonna',
   'Berry',
   'Birch Bonzai',
-  'Black Stonelilly'
+  'Black Stonelilly',
   'Blackberry',
   'blackthorn',
   'Blazereed',
