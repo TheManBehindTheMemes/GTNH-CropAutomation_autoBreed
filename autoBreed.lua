@@ -10,7 +10,7 @@ local isFinished = false
 
 --CHANGE ME; to learn how to set this correctly, look at the cropList file
 local targetCrop = cropList[1] --set this to the crop you want to breed
-local parentCrop = cropList[1] --set this to the crop you are using to breed the targeted crop
+local parentCrop
 
 
 -- ===================== FUNCTIONS ======================
@@ -151,6 +151,10 @@ local function runOnce(firstRun)
 
         if firstRun then
             database.updateFarm(slot, crop)
+            if slot == 1 then
+                parentCrop = database.getFarm()[1].name
+                print(string.format('autoBreed: attempting to breed %s with %s', targetCrop, parentCrop))
+            end
         end
 
         if slot % 2 == 0 then
@@ -170,7 +174,6 @@ end
 
 local function main()
     action.initWork()
-    print(string.format('autoBreed: attempting to breed %s with %s', targetCrop, parentCrop))
 
     --Terminates the program if the target crop or parent crop is not set
     if targetCrop == 'NULL' or parentCrop == 'NULL' then
