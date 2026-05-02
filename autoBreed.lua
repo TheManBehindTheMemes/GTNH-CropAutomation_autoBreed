@@ -69,6 +69,9 @@ local function checkChild(slot, crop)
 
         elseif crop.name == targetCrop then
             isFinished = true
+            action.transplant(gps.workingSlotToPos(slot), gps.storageSlotToPos(database.nextStorageSlot()))
+            action.placeCropStick(2)
+            database.addToStorage(crop)
             return
 
         elseif firstRun then
