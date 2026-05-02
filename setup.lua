@@ -10,6 +10,7 @@ local scripts = {
     'scanner.lua',
     'config.lua',
     'cropList.lua',
+    'breedRates.lua',
     'autoBreed.lua',
     'autoStat.lua',
     'autoTier.lua',
