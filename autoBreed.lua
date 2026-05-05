@@ -4,11 +4,13 @@ local gps = require('gps')
 local scanner = require('scanner')
 local config = require('config')
 local events = require('events')
+local cropList = require('cropList')
+local breedRates = require('breedRates')
 local lowestStat = 0
 local lowestStatSlot = 0
 local isFinished = false
 
---CHANGE ME; to learn how to set this correctly, look at the cropList file
+--CHANGE ME; If you don't know how to use this properly, look at the README
 local targetCrop = cropList[1] --set this to the crop you want to breed
 local parentCrop
 
@@ -175,9 +177,9 @@ end
 local function main()
     action.initWork()
 
-    --Terminates the program if the target crop or parent crop is not set
-    if targetCrop == 'NULL' or parentCrop == 'NULL' then
-        print('ERROR: targetCrop or parentCrop is not defined. Please assign a crop to to targetCrop and parentCrop, then restart the robot and try again.')
+    --Terminates the program if the target crop is not set
+    if targetCrop == 'NULL' then
+        print('ERROR: targetCrop is not defined. Please assign a crop to to targetCrop, then restart the robot and try again.')
         needExitFlag = true
     end
 
