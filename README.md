@@ -94,11 +94,11 @@ The third program **autoSpread** automatically spreads (duplicates) the target c
     
 (Optional) Disable useStorageFarm in the config to harvest child crops on the working farm during autoSpread instead of moving them to the storage farm. They are only harvested once they reach their maximum growth stage - 1 for the best chances at dropping seeds. Everything is deposited in the storage chest, including other types of seeds and those that do not meet the autoSpreadThreshold. This setting also causes autoSpread to run until the maximum breeding round is reached which means a single iteration can collect hundreds of seeds. It is recommended to use a full-block ME interface as the storage chest if using this method.
 
-The fourth program **autoBreed** automatically attempts to breed the crop that is specified in the code with the parent crop that is provided (and specified in the code). It will first attempt to fill the working area with the parent crop, to increase the chance of a successful mutation. After the working area is filled, it will then attempt to stat up the crop, just like the autoStat program. If the targetted crop is found at any stage in this process, the program will finish. An important thing to note is that it does not keep track of how much breeding rounds have occured, so it is advised to delete any excess byproducts. To run, simply enter:
+The fourth program **autoBreed** automatically attempts to breed the crop that is specified in the code with the parent crop that is provided. It will first attempt to fill the working area with the parent crop, to increase the chance of a successful mutation. After the working area is filled, it will then attempt to stat up the crop, just like the autoStat program. If the targetted crop is found at any stage in this process, the program will finish. An important thing to note is that it does not keep track of how much breeding rounds have occured, so it is advised to delete any excess byproducts and provide a large supply of crop sticks. To run, simply enter:
 
     autoBreed
 
-To set both the target crop and the parent crop for the program above, go to cropList.lua and find the crop you want to set. Take the line number that crop is on, and put it in the brackets of the desired variable in autoBreed.lua (see picture below for more detail). Please note that leave either the target crop or the parent crop as "1" will not allow the program to start.
+To set both the target crop and the parent crop for the program above, go to cropList.lua and find the crop you want to set. Take the line number that crop is on, and put it in the brackets of the desired variable in autoBreed.lua (see picture below for more detail). Please note that leaving the target crop as "1" will not allow the program to start.
 
 {{{insert image here}}}
 
@@ -187,4 +187,4 @@ To search for seed bags with growth 0-21, enter
 - The crop bot does not detect when it runs out of crop sticks.
 
 ## Thanks
-I (Fox) put a lot of time into this project, but I would like to give a huge thanks to huchenlei and xyqyear for their initial implementations and letting me take this project even further! Shoutout to Mozzg and Mderoulou for contributing to the repo and Sargates for helping with the RegEx!
+I would like to say thanks to DylanTaylor1 for developing the repo this is a fork of. Most of the code in here came from the original repo, and I would not have been able to move forward with this project.
