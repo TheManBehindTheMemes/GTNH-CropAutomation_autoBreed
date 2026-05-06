@@ -101,7 +101,14 @@ local function checkChild(slot, crop)
                 action.placeCropStick()
             end
 
-        elseif config.keepMutations and (not database.existInStorage(crop)) then
+        --check if the path is better
+        elseif calculateOptimalPath() then
+            parentCrop = '' --placeholder
+            --move crop to the lowest stat slot
+        end
+
+        --check if mutations should be stored, and said crop isn't already in storage 
+        elseif config.keepMutations and (not database.existInStorage(crop)) and crop.name ~= 'weed' then
             action.transplant(gps.workingSlotToPos(slot), gps.storageSlotToPos(database.nextStorageSlot()))
             action.placeCropStick(2)
             database.addToStorage(crop)
@@ -120,6 +127,16 @@ local function checkParent(slot, crop)
             database.updateFarm(slot, {isCrop=true, name='emptyCrop'})
         end
     end
+end
+
+local function calculateOptimalPath()
+    --check current plant, calculate the shortest path to target crop with current and new parent, compare values, find path with big chnaces but relatively small amount of steps
+    --[[if ((path is not better)) then
+        return false
+
+    else
+        return true
+    end]]
 end
 
 -- ====================== THE LOOP ======================
