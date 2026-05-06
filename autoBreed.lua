@@ -10,6 +10,7 @@ local lowestStat = 0
 local lowestStatSlot = 0
 local isFinished = false
 
+
 --CHANGE ME; If you don't know how to use this properly, look at the README
 local targetCrop = cropList[1] --set this to the crop you want to breed
 local parentCrop
@@ -108,7 +109,7 @@ local function checkChild(slot, crop)
         end
 
         --check if mutations should be stored, and said crop isn't already in storage 
-        elseif config.keepMutations and (not database.existInStorage(crop)) and crop.name ~= 'weed' then
+        elseif config.keepMutations and (not database.existInStorage(crop)) then
             action.transplant(gps.workingSlotToPos(slot), gps.storageSlotToPos(database.nextStorageSlot()))
             action.placeCropStick(2)
             database.addToStorage(crop)
@@ -131,12 +132,27 @@ end
 
 local function calculateOptimalPath()
     --check current plant, calculate the shortest path to target crop with current and new parent, compare values, find path with big chnaces but relatively small amount of steps
-    --[[if ((path is not better)) then
-        return false
+    --these variables are all placeholders
+    local steps1 = 0
+    local steps2 = 0
+    local chance1 = 0.0
+    local chance2 = 0.0
 
+    --check if new crop has a lower total chance
+    if chance2 < chance1 then
+        --check if it is more steps to the target crop
+        if steps2 > steps1 then
+            return false
+        --check if it has less steps, and is within a certain range of probability
+        elseif steps1 - steps2 >= 1 and chance1 - chance2 <= 0.01 * (steps1 - steps2) then
+            return true
+
+        elseif 
+            
+        end
     else
         return true
-    end]]
+    end
 end
 
 -- ====================== THE LOOP ======================
@@ -196,7 +212,7 @@ local function main()
 
     --Terminates the program if the target crop is not set
     if targetCrop == 'NULL' then
-        print('ERROR: targetCrop is not defined. Please assign a crop to to targetCrop, then restart the robot and try again.')
+        print('ERROR: targetCrop is not defined. Please assign a crop to to targetCrop in autoBreed.lua, then restart the robot and try again.')
         needExitFlag = true
     end
 
