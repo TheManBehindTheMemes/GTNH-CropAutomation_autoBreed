@@ -104,9 +104,10 @@ local function checkChild(slot, crop)
 
         --check if the path is better
         elseif calculateOptimalPath() then
-            parentCrop = '' --placeholder
-            --move crop to the lowest stat slot
-        end
+            parentCrop = crop
+            action.transplant(gps.workingSlotToPos(slot), gps.workingSlotToPos(lowestStatSlot))
+            action.placeCropStick(2)
+            --update the farm to make that the highest stat slot, and everything else the lowest
 
         --check if mutations should be stored, and said crop isn't already in storage 
         elseif config.keepMutations and (not database.existInStorage(crop)) then
@@ -131,7 +132,6 @@ local function checkParent(slot, crop)
 end
 
 local function calculateOptimalPath()
-    --check current plant, calculate the shortest path to target crop with current and new parent, compare values, find path with big chnaces but relatively small amount of steps
     --these variables are all placeholders
     local steps1 = 0
     local steps2 = 0
@@ -140,18 +140,59 @@ local function calculateOptimalPath()
 
     --check if new crop has a lower total chance
     if chance2 < chance1 then
+    
         --check if it is more steps to the target crop
         if steps2 > steps1 then
             return false
+        
         --check if it has less steps, and is within a certain range of probability
-        elseif steps1 - steps2 >= 1 and chance1 - chance2 <= 0.01 * (steps1 - steps2) then
+        elseif steps1 - steps2 > 0 and chance1 - chance2 <= 0.01 then
             return true
 
-        elseif 
-            
+        --check if it is at least 2 steps more efficient
+        elseif steps1 - steps2 >= 2 then
+            return true
+
+        --same amount of steps
+        else
+            return false
         end
+    
+    --check if new crop has a higher total chance
+    elseif chance2 > chance1 then
+
+        --check if it is less steps to the target crop
+        if steps2 < steps1 then
+            return true
+
+        --check if it has more steps, but is within a certain range of probability
+        elseif steps2 - steps1 < 2 and chance2 - chance1 >= 0.01 then
+            return true
+
+        --check if it is at least 2 steps less efficient
+        elseif steps2 - steps1 >= 2 then
+            return false
+
+        --same amount of steps
+        else
+            return true
+        end
+
+    --same total chance
     else
-        return true
+        
+        --has less steps
+        if steps2 < steps1
+            return true
+
+        --has more steps
+        elseif steps2 > steps1
+            return false
+
+        --has the same amount of steps
+        else
+            return false
+        end
     end
 end
 
