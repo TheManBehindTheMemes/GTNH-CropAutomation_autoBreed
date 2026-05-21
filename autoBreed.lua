@@ -9,11 +9,10 @@ local breedRates = require('breedRates')
 local lowestStat = 0
 local lowestStatSlot = 0
 local isFinished = false
-
+local parentCrop
 
 --CHANGE ME; If you don't know how to use this properly, look at the README
 local targetCrop = cropList[1] --set this to the crop you want to breed
-local parentCrop
 
 
 -- ===================== FUNCTIONS ======================
@@ -137,7 +136,8 @@ local function calculateOptimalPath()
     local steps2 = 0
     local chance1 = 0.0
     local chance2 = 0.0
-
+    --Note: need to account for crops that require special conditions (such as saltyroot and redwheat)
+    
     --check if new crop has a lower total chance
     if chance2 < chance1 then
     
