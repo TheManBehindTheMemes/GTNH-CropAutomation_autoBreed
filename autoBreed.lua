@@ -106,10 +106,10 @@ local function checkChild(slot, crop)
             parentCrop = crop
             action.transplant(gps.workingSlotToPos(slot), gps.workingSlotToPos(lowestStatSlot))
             action.placeCropStick(2)
-            --update the farm to make that the highest stat slot, and everything else the lowest
+            --need to update the farm to make that the highest stat slot, and everything else the lowest
 
-        --check if mutations should be stored, and said crop isn't already in storage 
-        elseif config.keepMutations and (not database.existInStorage(crop)) then
+        --check if mutations should be stored, the crop is not considered a weed, and said crop isn't already in storage
+        elseif config.keepMutations and (not scanner.isWeed) and (not database.existInStorage(crop))
             action.transplant(gps.workingSlotToPos(slot), gps.storageSlotToPos(database.nextStorageSlot()))
             action.placeCropStick(2)
             database.addToStorage(crop)
@@ -136,7 +136,7 @@ local function calculateOptimalPath()
     local steps2 = 0
     local chance1 = 0.0
     local chance2 = 0.0
-    --Note: need to account for crops that require special conditions (such as saltyroot and redwheat)
+    --Note: need to exclude redwheat, Salty Root, and all oreberries due to hard-to-control requirements
     
     --check if new crop has a lower total chance
     if chance2 < chance1 then
