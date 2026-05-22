@@ -44,7 +44,8 @@ local function isWeed(crop, farm)
         crop.name == 'Grass' or
         crop.gr > config.workingMaxGrowth or
         crop.re > config.workingMaxResistance or
-        (crop.name == 'venomilia' and crop.gr > 7)
+        (crop.name == 'venomilia' and crop.gr > 7) or
+        crop.name == 'Salty Root'
 
     elseif farm == 'storage' then
         return crop.name == 'weed' or
@@ -52,6 +53,7 @@ local function isWeed(crop, farm)
         crop.gr > config.storageMaxGrowth or
         crop.re > config.storageMaxResistance or
         (crop.name == 'venomilia' and crop.gr > 7)
+        crop.name == 'Salty Root'
     end
 end
 
