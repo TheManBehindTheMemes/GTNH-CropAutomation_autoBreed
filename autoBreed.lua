@@ -137,9 +137,12 @@ local function calculateOptimalPath()
     local chance1 = 0.0
     local chance2 = 0.0
     --Note: need to exclude redwheat, Salty Root, and all oreberries due to hard-to-control requirements
-    
-    --check if new crop has a lower total chance
-    if chance2 < chance1 then
+
+    --check if the new crop is blacklisted
+    if (scanner.isWeed or crop.name == redwheat or string.find(crop.name, 'Oreberry') ~= nil then
+            
+    --check if the new crop has a lower total chance
+    elseif chance2 < chance1 then
     
         --check if it is more steps to the target crop
         if steps2 > steps1 then
