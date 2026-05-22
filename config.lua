@@ -10,7 +10,7 @@ local config = {
     cleanUp = true,
     -- Moves crops to the storage farm, otherwise dumps everything in the storage chest.
     useStorageFarm = true,
-    -- Keep crops that are not the target crop during autoSpread and autoStat
+    -- Keep crops that are not the target crop during autoSpread, autoStat, and autoBreed
     keepMutations = false,
     -- Stat-up crops during autoTier (Very Slow)
     statWhileTiering = false,
