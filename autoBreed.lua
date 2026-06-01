@@ -130,16 +130,17 @@ local function checkParent(slot, crop)
     end
 end
 
+--returns a boolean that determines if the child crop offers a better path to the target crop
 local function calculateOptimalPath()
     --these variables are all placeholders
     local steps1 = 0
     local steps2 = 0
     local chance1 = 0.0
     local chance2 = 0.0
-    --Note: need to exclude redwheat, Salty Root, and all oreberries due to hard-to-control requirements
 
     --check if the new crop is blacklisted
-    if (scanner.isWeed or crop.name == redwheat or string.find(crop.name, 'Oreberry') ~= nil then
+    if scanner.isWeed or crop.name == redwheat or string.find(crop.name, 'Oreberry') ~= nil then
+        return false
             
     --check if the new crop has a lower total chance
     elseif chance2 < chance1 then
