@@ -94,13 +94,17 @@ The third program **autoSpread** automatically spreads (duplicates) the target c
     
 (Optional) Disable useStorageFarm in the config to harvest child crops on the working farm during autoSpread instead of moving them to the storage farm. They are only harvested once they reach their maximum growth stage - 1 for the best chances at dropping seeds. Everything is deposited in the storage chest, including other types of seeds and those that do not meet the autoSpreadThreshold. This setting also causes autoSpread to run until the maximum breeding round is reached which means a single iteration can collect hundreds of seeds. It is recommended to use a full-block ME interface as the storage chest if using this method.
 
-The fourth program **autoBreed** automatically attempts to breed the crop that is specified in the code with the parent crop that is provided (and specified in the code). It will first attempt to fill the working area with the parent crop, to increase the chance of a successful mutation. After the working area is filled, it will then attempt to stat up the crop, just like the autoStat program. If the targetted crop is found at any stage in this process, the program will finish. An important thing to note is that it does not keep track of how much breeding rounds have occured, so it is advised to delete any excess byproducts. To run, simply enter:
+The fourth program **autoBreed** automatically attempts to breed the crop that is specified in the code with the parent crop that is provided (and specified in the code). It will first attempt to fill the working area with the parent crop, to increase the chance of a successful mutation. After the working area is filled, it will then attempt to stat up the crop, just like the autoStat program. If the targetted crop is found at any stage in this process, the program will finish. To run, simply enter:
 
     autoBreed
 
 To set both the target crop and the parent crop for the program above, go to cropList.lua and find the crop you want to set. Take the line number that crop is on, and put it in the brackets of the desired variable in autoBreed.lua (see picture below for more detail). Please note that leave either the target crop or the parent crop as "1" will not allow the program to start.
 
 {{{insert image here}}}
+
+PLEASE NOTE THE FOLLOWING:
+1. autoBreed does not keep track of the breeding round. Therefore, it is HEAVILY advised to delete excess byproducts
+2. This can be very slow, especially with ore crops. Keep a large supply of cropsticks for your robot.
 
 Lastly, these programs can be chained together. This may be helpful if you have brand new crops (ie. 1/1/1 spruce saplings) and want them to immediately start spreading once fully statted-up. No crops are added to the storage farm until autoStat is complete. Note that keepMutations in the config should probably be set to false (default) otherwise the storage farm will be overwritten once the second program begins. To run autoSpread after autoStat, simply enter:
 
